@@ -19,7 +19,9 @@ let initWebRoutes = (app) => {
 
     router.get('/delete-crud', homeController.deleteCRUD); // Xóa
 
-    router.post('/api/login', userController.handleLogin);
+    router.post('/api/login', userController.handleLogin); // đăng nhập kết nối đến Database
+
+    router.get('/api/get-all-users', userController.handleGetAllUsers);
 
     return app.use("/", router);
 }
