@@ -21,7 +21,7 @@ let initWebRoutes = (app) => {
 
     router.post('/api/login', userController.handleLogin); // đăng nhập kết nối đến Database
 
-    router.get('/api/get-all-users', userController.handleGetAllUsers);
+    router.get('/api/get-all-users', userController.handleGetAllUsers); //Lấy data từ Database
 
     return app.use("/", router);
 }
