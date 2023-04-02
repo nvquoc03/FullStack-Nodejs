@@ -17,10 +17,12 @@ let initWebRoutes = (app) => {
     router.get('/delete-crud', homeController.deleteCRUD); // Xóa
 
     router.post('/api/login', userController.handleLogin); // đăng nhập kết nối đến Database
-    router.get('/api/get-all-users', userController.handleGetAllUsers); //Lấy data từ Database
-    router.post('/api/create-new-user', userController.handleCreateNewUser); // Tạo ms user trên Nodejs qua và hiện thị lên React
+    router.get('/api/get-all-users', userController.handleGetAllUsers); //Lấy data từ Database và hiển thị lên React
+    router.post('/api/create-new-user', userController.handleCreateNewUser); // Tạo ms user trên Nodejs qua db và hiện thị lên React
     router.put('/api/edit-user', userController.handleEditUser); // Sửa user trên Nodejs qua db và hiển thị lên React
     router.delete('/api/delete-user', userController.handleDeleteUser); // Xóa user trên Nodejs qua db và hiển thị React
+
+    router.get('/allcode', userController.getAllCode);
 
 
     return app.use("/", router);
