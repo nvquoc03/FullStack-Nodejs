@@ -41,8 +41,8 @@ initWebRoutes(app);
 
 connectDB();
 
-let port = process.env.PORT || 6969;
-// if port === undefined -> port == 6969  
+let port = process.env.PORT || 8080;
+// if port === undefined -> port == 8080  
 app.listen(port, () => {
     console.log("Backend Nodejs is running on the port: " + port)
 
