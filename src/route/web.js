@@ -8,9 +8,7 @@ let initWebRoutes = (app) => {
     router.get("/", homeController.getHomePage);
 
     router.get("/crud", homeController.getCRUD); // Tạo
-
     router.post("/post-crud", homeController.postCRUD); // Trang khi tạo xong
-
     router.get('/get-crud', homeController.displayGetCRUD); // Hiện thị
     router.get('/edit-crud', homeController.getEditCRUD); // Sửa
     router.post('/put-crud', homeController.putCRUD); // Trang khi sửa xog
@@ -22,7 +20,7 @@ let initWebRoutes = (app) => {
     router.put('/api/edit-user', userController.handleEditUser); // Sửa user trên Nodejs qua db và hiển thị lên React
     router.delete('/api/delete-user', userController.handleDeleteUser); // Xóa user trên Nodejs qua db và hiển thị React
 
-    router.get('/allcode', userController.getAllCode);
+    router.get('/api/allcode', userController.getAllCode);
 
 
     return app.use("/", router);
