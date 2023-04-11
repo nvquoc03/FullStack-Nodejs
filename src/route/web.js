@@ -20,12 +20,12 @@ let initWebRoutes = (app) => {
     router.post('/api/create-new-user', userController.handleCreateNewUser); // Tạo ms user trên Nodejs qua db và hiện thị lên React
     router.put('/api/edit-user', userController.handleEditUser); // Sửa user trên Nodejs qua db và hiển thị lên React
     router.delete('/api/delete-user', userController.handleDeleteUser); // Xóa user trên Nodejs qua db và hiển thị React
-
     router.get('/api/allcode', userController.getAllCode);
 
     router.get('/api/top-doctor-home', doctorController.getTopDoctorHome);
     router.get('/api/get-all-doctors', doctorController.getAllDoctors);
     router.post('/api/save-infor-doctor', doctorController.postInforDoctor)
+    router.get('/api/get-detail-doctor-by-id', doctorController.getDetailDoctorById);
 
 
 
