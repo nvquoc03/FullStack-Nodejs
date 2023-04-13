@@ -89,7 +89,7 @@ let getDetailDoctorById = (inputId) => {
                 let data = await db.User.findOne({
                     where: { id: inputId },
                     attributes: {
-                        exclude: ['password', 'image']
+                        exclude: ['password']
                     },
                     include: [ // Sẽ lấy thông tin User và sẽ lấy thông tin của nó (User) tồn tại trong bảng Markdown
                         //join 2 table vs nhau
@@ -101,10 +101,13 @@ let getDetailDoctorById = (inputId) => {
 
 
                     ],
-                    raw: true,
+                    raw: false,
                     nest: true
-
                 })
+                if (data && data.image) {
+                    data.image = new Buffer(data.image, 'base64').toString('binary')
+                }
+                if (!data) data = {}
                 resolve({
                     errCode: 0,
                     data: data
