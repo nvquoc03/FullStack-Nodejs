@@ -140,7 +140,7 @@ let getDetailDoctorById = (inputId) => {
     })
 }
 
-let bulkCreateScheduleService = (data) => {
+let bulkCreateSchedule = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data && !data.arrSchedule || !data.doctorId || !data.FormatedDate) {
@@ -164,7 +164,7 @@ let bulkCreateScheduleService = (data) => {
                     raw: true
                 });
 
-                //Convert TimeStamp(00:00:00.000Z) to TimeStamp (012345678)
+                //Convert TimeStamp(00:00:00.000Z)-in-DataBase to TimeStamp (012345678)-in-Client
                 if (existing && existing.length > 0) {
                     existing = existing.map(item => {
                         item.date = new Date(item.date).getTime();
@@ -196,10 +196,38 @@ let bulkCreateScheduleService = (data) => {
     })
 }
 
+let getScheduleByDate = (doctorId, date) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!doctorId || !date) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter!'
+                })
+            } else {
+                let dataSchedule = await db.Schedule.findAll({
+                    where: {
+                        doctorId: doctorId,
+                        date: date
+                    }
+                })
+                if (!dataSchedule) dataSchedule = [];
+                resolve({
+                    errCode: 0,
+                    data: dataSchedule
+                })
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
     getDetailDoctorById: getDetailDoctorById,
-    bulkCreateScheduleService: bulkCreateScheduleService
+    bulkCreateSchedule: bulkCreateSchedule,
+    getScheduleByDate: getScheduleByDate
 }
