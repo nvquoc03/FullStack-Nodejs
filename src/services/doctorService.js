@@ -164,18 +164,10 @@ let bulkCreateSchedule = (data) => {
                     raw: true
                 });
 
-                //Convert TimeStamp(00:00:00.000Z)-in-DataBase to TimeStamp (012345678)-in-Client
-                if (existing && existing.length > 0) {
-                    existing = existing.map(item => {
-                        item.date = new Date(item.date).getTime();
-                        return item;
-                    })
-                }
-
                 //Existing in DataBase, Schedule is input Client
                 //Compare different 
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && a.date === b.date;
+                    return a.timeType === b.timeType && a.date === +b.date;
                 });
 
                 //Create data if have different
@@ -209,7 +201,12 @@ let getScheduleByDate = (doctorId, date) => {
                     where: {
                         doctorId: doctorId,
                         date: date
-                    }
+                    },
+                    include: [
+                        { model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi'] },
+                    ],
+                    raw: false,
+                    nest: true
                 })
                 if (!dataSchedule) dataSchedule = [];
                 resolve({
