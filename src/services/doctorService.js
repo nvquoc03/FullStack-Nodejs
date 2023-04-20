@@ -167,7 +167,7 @@ let bulkCreateSchedule = (data) => {
                 //Existing in DataBase, Schedule is input Client
                 //Compare different 
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && a.date === +b.date;
+                    return a.timeType === b.timeType && +a.date === +b.date;
                 });
 
                 //Create data if have different
