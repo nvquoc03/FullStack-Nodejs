@@ -86,8 +86,6 @@ let saveDetailInforDoctor = (inputData) => {
                     }
 
                 }
-
-
                 //upsert(update and insert) to Doctor_Infor table
                 let doctorInfor = await db.Doctor_Infor.findOne({
                     where: {
@@ -271,11 +269,48 @@ let getScheduleByDate = (doctorId, date) => {
     })
 }
 
+let getExtraInforDoctorById = (idDoctorInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!idDoctorInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter1'
+                })
+            } else {
+                let data = await db.Doctor_Infor.findOne({
+                    where: {
+                        doctorId: idDoctorInput
+                    },
+                    attributes: {
+                        exclude: ['id', 'doctorId']
+                    },
+                    include: [
+                        { model: db.Allcode, as: 'priceIdData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'paymentIdData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'provinceIdData', attributes: ['valueEn', 'valueVi'] },
+                    ],
+                    raw: false,
+                    nest: true
+                })
+                if (!data) data = {};
+                resolve({
+                    errCode: 0,
+                    data: data
+                })
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
     getDetailDoctorById: getDetailDoctorById,
     bulkCreateSchedule: bulkCreateSchedule,
-    getScheduleByDate: getScheduleByDate
+    getScheduleByDate: getScheduleByDate,
+    getExtraInforDoctorById: getExtraInforDoctorById
 }
