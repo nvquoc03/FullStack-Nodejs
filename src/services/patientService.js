@@ -6,6 +6,7 @@ let postBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.email || !data.doctorId || !data.date || !data.timeType
+                || !data.fullName || !data.timeString || !data.doctorName
             ) {
                 resolve({
                     errCode: 1,
@@ -15,10 +16,11 @@ let postBookAppointment = (data) => {
 
                 await emailService.sendSimpleEmail({
                     receiverEmail: data.email,
-                    patientName: 'Anonymous Person',
-                    time: "8AM-9AM Sunday 30/4/2023",
-                    doctorName: 'SNDev',
-                    redirectLink: "https://www.facebook.com/vanquoc.2le3"
+                    patientName: data.fullName,
+                    time: data.timeString,
+                    doctorName: data.doctorName,
+                    redirectLink: "https://www.facebook.com/vanquoc.2le3",
+                    language: data.language
 
                 })
                 //upsert patient
