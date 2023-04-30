@@ -32,18 +32,18 @@ let getBodyHTMLEmail = (dataSend) => {
         result =
             `
         <h3>Xin Chào ${dataSend.patientName}</h3>
-        <p>Bạn nhận được email này vì đã đặt lịch khám bệnh Online trên SNDdev </p>
-        <p>Thông tin đặt lịch khám bênh:</p>
+        <p>Bạn nhận được email này vì đã đặt lịch khám bệnh Online trên SNDev </p>
+        <p>Thông tin đặt lịch khám bệnh:</p>
         <p><b>Thời gian: ${dataSend.time}</b></p>
         <p><b>Bác sĩ khám: ${dataSend.doctorName}</b></p>
         <p>
-        Nếu thông tin trên là đúng sự thật, vui lòng Click vào đường link bên dướiđể xác nhận và hoàn tất thủ tục đặt lịch khám bệnh
+        Nếu thông tin trên là đúng sự thật, vui lòng click vào đường link bên dưới để xác nhận và hoàn tất thủ tục đặt lịch khám bệnh
         <p/>
         <div>
             <a href=${dataSend.redirectLink} target="_blank">Click here<a/>
         </div>
         <div>
-            Xin chân thành cảm ơn.
+            Xin chân thành cảm ơn!
         </div>
         `
     }
@@ -51,7 +51,7 @@ let getBodyHTMLEmail = (dataSend) => {
         result =
             `
         <h3>Dear ${dataSend.patientName}</h3>
-        <p>You received this email because you booked an online medical appointment on SNDdev </p>
+        <p>You received this email because you booked an online medical appointment on SNDev </p>
         <p>Medical appointment booking information:</p>
         <p><b>Time: ${dataSend.time}</b></p>
         <p><b>Doctor: ${dataSend.doctorName}</b></p>
